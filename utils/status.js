@@ -1,5 +1,8 @@
 // Ideia do Marcello de concentrar todos os status com as respectivas mensagens em uma file
 
+// PORTS
+const PORT = '3000';
+
 // HTTP response status codes
 const HTTP_OK_STATUS = 200;
 const HTTP_CREATED_STATUS = 201;
@@ -29,6 +32,7 @@ const MSG_DATE_NOT_VALID = {
 const MSG_RATE_NOT_VALID = { message: 'O campo "rate" deve ser um inteiro de 1 à 5' };
 
 module.exports = {
+  PORT,
   HTTP_OK_STATUS,
   HTTP_CREATED_STATUS,
   HTTP_NO_CONTENT_STATUS,
