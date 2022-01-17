@@ -1,9 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const talkerUtils = require('./utils/talker');
-
-const { read } = talkerUtils;
+const getAllTalkers = require('./middlewares/getAllTalkers');
+const getTalkersById = require('./middlewares/getTalkersById');
+const { validateEmail, validatePassword, login } = require('./middlewares/login');
 
 const app = express();
 app.use(bodyParser.json());
@@ -20,18 +20,8 @@ app.listen(PORT, () => {
   console.log('Online');
 });
 
-app.get('/talker', async (_req, res) => {
-  const data = await read();
-  res.status(200).json(data);
-});
+app.get('/talker', getAllTalkers);
 
-app.get('/talker/:id', async (req, res) => {
-  const data = await read();
-  const talkers = data.find((talker) => talker.id === Number(req.params.id));
-  if (!talkers) {
-    return res.status(404).json({
-      message: 'Pessoa palestrante não encontrada',
-    });
-  }
-  res.status(200).json(talkers);
-});
+app.get('/talker/:id', getTalkersById);
+
+app.post('/login', validateEmail, validatePassword, login);
