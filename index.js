@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 
 const talkerUtils = require('./utils/talker');
 
-const { read, write } = talkerUtils;
+const { read } = talkerUtils;
 
 const app = express();
 app.use(bodyParser.json());
@@ -23,4 +23,15 @@ app.listen(PORT, () => {
 app.get('/talker', async (_req, res) => {
   const data = await read();
   res.status(200).json(data);
+});
+
+app.get('/talker/:id', async (req, res) => {
+  const data = await read();
+  const talker = data.find(talker => talker.id === Number(req.params.id));
+  if (!talker) {
+    return res.status(404).json({
+      message: 'Pessoa palestrante não encontrada',
+    });
+  }
+  res.status(200).json(talker);
 });
