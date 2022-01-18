@@ -6,7 +6,7 @@ async function read() {
 }
 
 async function write(data) {
-  await fs.writeFile('./talker.json', data);
+  await fs.writeFile('./talker.json', JSON.stringify(data));
 }
 
 module.exports = {
