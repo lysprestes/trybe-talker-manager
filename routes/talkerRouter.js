@@ -17,6 +17,7 @@ const talkerRouter = express.Router();
 
 const getAllTalkers = require('../middlewares/getAllTalkers');
 const getTalkersById = require('../middlewares/getTalkersById');
+const deleteTalker = require('../middlewares/deleteTalker');
 
 talkerRouter.get('/', getAllTalkers);
 
@@ -28,6 +29,10 @@ talkerRouter.post(
 talkerRouter.put(
   '/:id', validateToken, validateName, validateAge,
   validateTalk, validateDate, validateRate, editTalker,
+);
+
+talkerRouter.delete(
+  '/:id', validateToken, deleteTalker,
 );
 
 talkerRouter.get('/:id', getTalkersById);

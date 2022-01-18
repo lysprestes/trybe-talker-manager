@@ -10,10 +10,8 @@ const editTalker = async (req, res) => {
   talkerList[talkerIndex] = {
     id: Number(req.params.id),
     ...req.body,
-    // id: talkerList[talkerIndex].id,
   };
   await write(talkerList);
-  console.log(talkerList);
   res.status(HTTP_OK_STATUS).json({
     id: Number(req.params.id),
     ...req.body,
