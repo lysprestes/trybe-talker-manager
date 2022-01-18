@@ -11,6 +11,8 @@ const {
 
 const createTalker = require('../middlewares/createTalker');
 
+const editTalker = require('../middlewares/editTalker');
+
 const talkerRouter = express.Router();
 
 const getAllTalkers = require('../middlewares/getAllTalkers');
@@ -21,6 +23,11 @@ talkerRouter.get('/', getAllTalkers);
 talkerRouter.post(
   '/', validateToken, validateName, validateAge,
   validateTalk, validateDate, validateRate, createTalker,
+);
+
+talkerRouter.put(
+  '/:id', validateToken, validateName, validateAge,
+  validateTalk, validateDate, validateRate, editTalker,
 );
 
 talkerRouter.get('/:id', getTalkersById);
